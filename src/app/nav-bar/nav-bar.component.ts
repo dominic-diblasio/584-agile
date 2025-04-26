@@ -3,6 +3,8 @@ import { Router, RouterLink } from '@angular/router';
 import { MatToolbarModule } from '@angular/material/toolbar'
 import { MatIcon } from '@angular/material/icon'
 import { MatButtonModule } from '@angular/material/button'
+import { AuthService } from '../auth/auth.service';
+import { takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-nav-bar',
@@ -16,5 +18,12 @@ import { MatButtonModule } from '@angular/material/button'
   styleUrl: './nav-bar.component.scss'
 })
 export class NavBarComponent {
-
+  isLoggedIn: boolean = false;
+  constructor(private authService: AuthService) {
+    authService.authStatus.pipe(/*takeUntil(
+      condition => ;
+    )*/).subscribe(
+      result => this.isLoggedIn = result
+    );
+  }
 }
