@@ -31,8 +31,12 @@ export class AuthService {
   }
 
   logout(): void {
-    // temporary
-    if(localStorage.getItem("c584_jwt"))
-      localStorage.removeItem("c584_jwt");
+    //if(localStorage.getItem("c584_jwt"))
+    localStorage.removeItem("c584_jwt");
+    this.setAuthStatus(false);
+  }
+
+  isAuthenticated() {
+    return localStorage.getItem("c584_jwt") != null;
   }
 }
